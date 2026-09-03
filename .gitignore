@@ -1,0 +1,21 @@
+# Matériel de direction artistique (design system source, exports Claude
+# Design, moodboards de référence) : pas destiné à être publié avec le site.
+# Hostinger déploie tout le dépôt tel quel (pas d'étape de build), donc rien
+# ici ne doit être exposé publiquement. Source de vérité : canvas Claude
+# Design (voir CLAUDE.md) + ce dossier en local.
+design/
+
+# Mémos/debriefs des agents Ticcy (notes de travail internes, contexte de
+# décisions) : pas destinés à être publiés avec le site, pour la même raison
+# que design/ ci-dessus (Hostinger déploie tout le dépôt tel quel). Restent
+# en local uniquement.
+agents/
+
+# Configuration VS Code locale (spécifique à la machine) — les modèles
+# .example restent versionnés.
+.vscode/*
+!.vscode/*.example
+
+# Fichiers système
+.DS_Store
+Thumbs.db
