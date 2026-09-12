@@ -13,6 +13,7 @@ agents/
 
 # Configuration VS Code locale (spécifique à la machine) — les modèles
 # .example restent versionnés.
+.vscode/
 .vscode/*
 !.vscode/*.example
 

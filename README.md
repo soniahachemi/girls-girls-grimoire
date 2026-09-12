@@ -1,10 +1,14 @@
-# Girls Girls Grimoire — Coming Soon
+# Girls Girls Grimoire
 
-Page d'attente statique pour [girlsgirlsgrimoire.com](https://girlsgirlsgrimoire.com).
+Coming soon landing page for [girlsgirlsgrimoire.com](https://girlsgirlsgrimoire.com).
 
-- `index.html` / `assets/style.css` — la page.
-- `CLAUDE.md` — contexte technique du projet.
-- `agents/shuri/memo.md` — mémo de l'agent Ticcy en charge (Shuri, Architecte).
+## Stack
 
-Déploiement automatique vers Hostinger via son intégration Git native à
-chaque push sur `main` (voir `CLAUDE.md`).
+Plain HTML/CSS — no framework, no build step.
+
+- `index.html` — page markup.
+- `assets/style.css` — styles.
+
+## Deployment
+
+Automatic deployment to Hostinger via its native Git integration on every push to `main`.
