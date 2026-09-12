@@ -17,6 +17,10 @@ agents/
 .vscode/*
 !.vscode/*.example
 
+# Dépendances Node (outillage de test, jamais commitées) — voir package.json
+# et agents/guidelines.md (section Tests).
+node_modules/
+
 # Fichiers système
 .DS_Store
 Thumbs.db
