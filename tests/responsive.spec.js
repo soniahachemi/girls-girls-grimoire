@@ -8,6 +8,9 @@ const { test, expect } = require('@playwright/test');
  * breakage/overflow/overlap), not a pixel-perfect match — per project
  * policy (agents/guidelines.md, Tests section: correct display at any
  * screen width between mobile and desktop).
+ * desktop-short (1440x760, GGG-10) approximates a real browser window
+ * (address bar/tabs/bookmarks bar deducted) at the same width as desktop,
+ * to catch vertical overflow that the taller "pure" viewports miss.
  */
 
 test.describe('Responsive', () => {
@@ -22,6 +25,15 @@ test.describe('Responsive', () => {
     }));
     // 1px tolerance for sub-pixel rounding.
     expect(scrollWidth).toBeLessThanOrEqual(clientWidth + 1);
+  });
+
+  test('no vertical overflow', async ({ page }) => {
+    const { scrollHeight, clientHeight } = await page.evaluate(() => ({
+      scrollHeight: document.documentElement.scrollHeight,
+      clientHeight: document.documentElement.clientHeight,
+    }));
+    // 1px tolerance for sub-pixel rounding.
+    expect(scrollHeight).toBeLessThanOrEqual(clientHeight + 1);
   });
 
   test('key elements stay within the viewport', async ({ page }) => {
@@ -52,8 +64,14 @@ test.describe('Responsive', () => {
     }
   });
 
-  test('corner sparkles: 4 on desktop, 2 on mobile and tablet', async ({ page }, testInfo) => {
-    const expected = testInfo.project.name === 'desktop' ? 4 : 2;
+  test('corner sparkles: 4 on desktop widths, 2 on mobile and tablet', async ({ page }) => {
+    const viewport = page.viewportSize();
+    expect(viewport).not.toBeNull();
+    if (!viewport) return;
+    // Keyed on viewport width (the actual design breakpoint), not on the
+    // project name — desktop-short (GGG-10) shares desktop's width at a
+    // shorter height and must follow the same sparkle count.
+    const expected = viewport.width >= 1440 ? 4 : 2;
     await expect(page.getByTestId('corner-sparkle')).toHaveCount(expected);
   });
 
