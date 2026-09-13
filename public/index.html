@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Girls Girl's Grimoire — Bientôt disponible</title>
+<meta name="description" content="Girls Girl's Grimoire, le grimoire moderne des filles pour un quotidien plus doux. Bientôt disponible.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Corner sparkles: two are always present (top corners), two more are
+       added on desktop viewports only via the small script at the bottom
+       of the page (see comment there for why this needs JS). -->
+  <span class="corner-sparkle corner-sparkle--top-left" data-testid="corner-sparkle" aria-hidden="true">
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 0C10.6 6.2 13.4 9.4 20 10C13.4 10.6 10.6 13.8 10 20C9.4 13.8 6.6 10.6 0 10C6.6 9.4 9.4 6.2 10 0Z" fill="#C6A063"/>
+    </svg>
+  </span>
+  <span class="corner-sparkle corner-sparkle--top-right" data-testid="corner-sparkle" aria-hidden="true">
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 0C10.6 6.2 13.4 9.4 20 10C13.4 10.6 10.6 13.8 10 20C9.4 13.8 6.6 10.6 0 10C6.6 9.4 9.4 6.2 10 0Z" fill="#C6A063"/>
+    </svg>
+  </span>
+  <span class="corner-sparkle corner-sparkle--bottom-left corner-sparkle--desktop-only" hidden aria-hidden="true">
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 0C10.6 6.2 13.4 9.4 20 10C13.4 10.6 10.6 13.8 10 20C9.4 13.8 6.6 10.6 0 10C6.6 9.4 9.4 6.2 10 0Z" fill="#C6A063"/>
+    </svg>
+  </span>
+  <span class="corner-sparkle corner-sparkle--bottom-right corner-sparkle--desktop-only" hidden aria-hidden="true">
+    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 0C10.6 6.2 13.4 9.4 20 10C13.4 10.6 10.6 13.8 10 20C9.4 13.8 6.6 10.6 0 10C6.6 9.4 9.4 6.2 10 0Z" fill="#C6A063"/>
+    </svg>
+  </span>
+
+  <main class="composition">
+
+    <div class="monogram" data-testid="monogram">
+      <span>GGG</span>
+    </div>
+
+    <svg class="sparkle-accent" data-testid="sparkle-accent" aria-hidden="true" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 0C10.6 6.2 13.4 9.4 20 10C13.4 10.6 10.6 13.8 10 20C9.4 13.8 6.6 10.6 0 10C6.6 9.4 9.4 6.2 10 0Z" fill="#C6A063"/>
+    </svg>
+
+    <h1 class="wordmark">Girls Girl's <span class="wordmark__line2">Grimoire</span></h1>
+
+    <svg class="lace-divider" data-testid="lace-divider" aria-hidden="true" viewBox="0 0 220 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2 C 11 2 11 14 20 14 C 29 14 29 2 38 2 C 47 2 47 14 56 14 C 65 14 65 2 74 2 C 83 2 83 14 92 14 C 101 14 101 2 110 2 C 119 2 119 14 128 14 C 137 14 137 2 146 2 C 155 2 155 14 164 14 C 173 14 173 2 182 2 C 191 2 191 14 200 14 C 209 14 209 2 218 2" stroke="#C67F8F" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="2" cy="2" r="1.6" fill="#C67F8F"/>
+      <circle cx="218" cy="2" r="1.6" fill="#C67F8F"/>
+    </svg>
+
+    <p class="tagline">Le grimoire moderne des filles pour un quotidien plus doux</p>
+
+    <p class="body-copy">Des conseils qui font du bien, des sélections malines à moins de 50&nbsp;€ et un brin de magie douce pour ton quotidien.</p>
+
+    <p class="badge">✦&nbsp; Bientôt disponible &nbsp;✦</p>
+
+    <div class="wax-seal" data-testid="wax-seal">
+      <div class="wax-seal__blob">
+        <span>GGG</span>
+      </div>
+      <div class="wax-seal__drip" aria-hidden="true"></div>
+    </div>
+
+  </main>
+
+  <p class="footer">© 2026 Girls Girl's Grimoire</p>
+
+</div>
+
+<script>
+  // La maquette validée (GGG-8) prévoit 4 sparkles décoratifs aux coins en
+  // desktop, mais seulement 2 (en haut) sur mobile/tablette. Comme il s'agit
+  // d'une seule page statique (pas de rendu différent par appareil), le
+  // contrat data-testid de tests/structure.spec.js — qui exige un nombre
+  // d'éléments [data-testid="corner-sparkle"] différent selon la largeur —
+  // ne peut pas être satisfait par CSS seul : un élément masqué en CSS
+  // (display:none) reste compté par Playwright. Ce petit script est donc la
+  // seule façon de respecter à la fois la maquette et les tests ; c'est un
+  // écart au principe "HTML/CSS pur" des guidelines, signalé à Bimo.
+  (function () {
+    var extraCorners = document.querySelectorAll('.corner-sparkle--desktop-only');
+    var desktopQuery = window.matchMedia('(min-width: 1024px)');
+
+    function syncCorners(query) {
+      var isDesktop = query.matches;
+      extraCorners.forEach(function (el) {
+        el.hidden = !isDesktop;
+        if (isDesktop) {
+          el.setAttribute('data-testid', 'corner-sparkle');
+        } else {
+          el.removeAttribute('data-testid');
+        }
+      });
+    }
+
+    syncCorners(desktopQuery);
+    desktopQuery.addEventListener('change', syncCorners);
+  })();
+</script>
+
+</body>
+</html>
