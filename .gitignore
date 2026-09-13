@@ -5,6 +5,8 @@
 # Design (voir CLAUDE.md) + ce dossier en local.
 design/
 
+test-results/
+
 # Mémos/debriefs des agents Ticcy (notes de travail internes, contexte de
 # décisions) : pas destinés à être publiés avec le site, pour la même raison
 # que design/ ci-dessus (Hostinger déploie tout le dépôt tel quel). Restent

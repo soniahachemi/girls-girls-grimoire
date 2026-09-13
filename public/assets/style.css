@@ -56,16 +56,16 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(28px, 7vw, 56px) clamp(20px, 6vw, 64px);
-  background: radial-gradient(ellipse clamp(420px, 62vw, 900px) clamp(520px, 50vw, 720px) at 50% 41%, var(--blush) 0%, var(--paper) 62%, var(--paper-deep) 100%);
+  padding: clamp(28px, 7vmin, 56px) clamp(20px, 6vmin, 64px);
+  background: radial-gradient(ellipse clamp(420px, 62vmin, 900px) clamp(520px, 50vmin, 720px) at 50% 41%, var(--blush) 0%, var(--paper) 62%, var(--paper-deep) 100%);
 }
 
 /* Corner sparkles */
 
 .corner-sparkle {
   position: absolute;
-  width: clamp(13px, 1.3vw, 18px);
-  height: clamp(13px, 1.3vw, 18px);
+  width: clamp(13px, 1.3vmin, 18px);
+  height: clamp(13px, 1.3vmin, 18px);
   opacity: 0.55;
 }
 
@@ -76,28 +76,28 @@ a:hover {
 }
 
 .corner-sparkle--top-left {
-  top: clamp(24px, 4vw, 56px);
-  left: clamp(20px, 4.5vw, 64px);
+  top: clamp(24px, 4vmin, 56px);
+  left: clamp(20px, 4.5vmin, 64px);
 }
 
 .corner-sparkle--top-right {
-  top: clamp(24px, 4vw, 56px);
-  right: clamp(20px, 4.5vw, 64px);
+  top: clamp(24px, 4vmin, 56px);
+  right: clamp(20px, 4.5vmin, 64px);
 }
 
 .corner-sparkle--bottom-left {
-  bottom: clamp(24px, 4vw, 56px);
-  left: clamp(20px, 4.5vw, 64px);
-  width: clamp(13px, 0.9vw, 13px);
-  height: clamp(13px, 0.9vw, 13px);
+  bottom: clamp(24px, 4vmin, 56px);
+  left: clamp(20px, 4.5vmin, 64px);
+  width: clamp(13px, 0.9vmin, 13px);
+  height: clamp(13px, 0.9vmin, 13px);
   opacity: 0.4;
 }
 
 .corner-sparkle--bottom-right {
-  bottom: clamp(24px, 4vw, 56px);
-  right: clamp(20px, 4.5vw, 64px);
-  width: clamp(13px, 0.9vw, 13px);
-  height: clamp(13px, 0.9vw, 13px);
+  bottom: clamp(24px, 4vmin, 56px);
+  right: clamp(20px, 4.5vmin, 64px);
+  width: clamp(13px, 0.9vmin, 13px);
+  height: clamp(13px, 0.9vmin, 13px);
   opacity: 0.4;
 }
 
@@ -113,15 +113,15 @@ a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(14px, 1.8vw, 26px);
+  gap: clamp(14px, 1.8vmin, 26px);
   text-align: center;
   max-width: 620px;
 }
 
 .monogram {
   position: relative;
-  width: clamp(78px, 8vw, 110px);
-  height: clamp(78px, 8vw, 110px);
+  width: clamp(78px, 8vmin, 110px);
+  height: clamp(78px, 8vmin, 110px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,21 +148,21 @@ a:hover {
   position: relative;
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  font-size: clamp(21px, 2.3vw, 30px);
+  font-size: clamp(21px, 2.3vmin, 30px);
   color: var(--rose);
-  letter-spacing: clamp(1.5px, 0.15vw, 2px);
+  letter-spacing: clamp(1.5px, 0.15vmin, 2px);
 }
 
 .sparkle-accent {
-  width: clamp(17px, 1.6vw, 22px);
-  height: clamp(17px, 1.6vw, 22px);
+  width: clamp(17px, 1.6vmin, 22px);
+  height: clamp(17px, 1.6vmin, 22px);
 }
 
 .wordmark {
   margin: 0;
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  font-size: clamp(38px, 7vw, 66px);
+  font-size: clamp(38px, 7vmin, 66px);
   line-height: 1.1;
   color: var(--rose);
 }
@@ -172,7 +172,7 @@ a:hover {
 }
 
 .lace-divider {
-  width: clamp(160px, 16vw, 220px);
+  width: clamp(160px, 16vmin, 220px);
   height: auto;
 }
 
@@ -181,38 +181,38 @@ a:hover {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(17px, 1.8vw, 24px);
+  font-size: clamp(17px, 1.8vmin, 24px);
   line-height: 1.35;
   color: var(--ink);
   letter-spacing: 0.3px;
-  max-width: clamp(280px, 32vw, 460px);
+  max-width: clamp(280px, 32vmin, 460px);
 }
 
 .body-copy {
   margin: 0;
   font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
-  font-size: clamp(15px, 1.4vw, 19px);
+  font-size: clamp(15px, 1.4vmin, 19px);
   line-height: 1.6;
   color: var(--ink);
-  max-width: clamp(280px, 32vw, 460px);
+  max-width: clamp(280px, 32vmin, 460px);
 }
 
 .badge {
-  margin: clamp(4px, 0.5vw, 6px) 0 0;
+  margin: clamp(4px, 0.5vmin, 6px) 0 0;
   font-family: 'Cormorant Garamond', serif;
   font-weight: 600;
-  font-size: clamp(12px, 1.1vw, 15px);
-  letter-spacing: clamp(2.5px, 0.25vw, 3.5px);
+  font-size: clamp(12px, 1.1vmin, 15px);
+  letter-spacing: clamp(2.5px, 0.25vmin, 3.5px);
   text-transform: uppercase;
   color: var(--gold-text);
 }
 
 .wax-seal {
   position: relative;
-  width: clamp(58px, 6vw, 76px);
-  height: clamp(58px, 6vw, 76px);
-  margin-top: clamp(10px, 1vw, 14px);
+  width: clamp(58px, 6vmin, 76px);
+  height: clamp(58px, 6vmin, 76px);
+  margin-top: clamp(10px, 1vmin, 14px);
 }
 
 .wax-seal__blob {
@@ -229,7 +229,7 @@ a:hover {
 .wax-seal__blob span {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  font-size: clamp(17px, 1.6vw, 22px);
+  font-size: clamp(17px, 1.6vmin, 22px);
   /* Deep ink, not gold: gold text here was under 2.5:1 against the seal's
      mauve/rose gradient. Counter-intuitively cream doesn't fix it either —
      the gradient's light highlight (radial-gradient center) sits right
@@ -243,8 +243,8 @@ a:hover {
   position: absolute;
   bottom: -4px;
   left: 36%;
-  width: clamp(9px, 0.9vw, 12px);
-  height: clamp(7px, 0.7vw, 9px);
+  width: clamp(9px, 0.9vmin, 12px);
+  height: clamp(7px, 0.7vmin, 9px);
   border-radius: 50%;
   background: var(--rose);
   opacity: 0.85;
@@ -252,14 +252,14 @@ a:hover {
 
 .footer {
   position: absolute;
-  bottom: clamp(18px, 2.5vw, 30px);
+  bottom: clamp(18px, 2.5vmin, 30px);
   left: 0;
   right: 0;
   text-align: center;
   margin: 0;
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(11px, 1vw, 13px);
-  letter-spacing: clamp(1.2px, 0.13vw, 1.5px);
+  font-size: clamp(11px, 1vmin, 13px);
+  letter-spacing: clamp(1.2px, 0.13vmin, 1.5px);
   color: var(--ink);
   /* Was 0.5 (≈2.75:1 on --paper, fails WCAG AA). 0.72 keeps the same muted
      footer look while clearing the 4.5:1 threshold (~4.9:1). */
