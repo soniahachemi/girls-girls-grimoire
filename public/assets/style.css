@@ -1,0 +1,267 @@
+/* Girls Girl's Grimoire — Coming Soon
+   Design system v4 "Vintage Glam" (design/design-systems/GGG-3_main.md).
+   Fluid scaling between the two validated mockups (mobile 390px /
+   desktop 1440px, design/mockups/GGG-8_coming-soon/) via clamp(), so the
+   page stays correct at every width in between, tablet (768px) included
+   (no dedicated mockup for tablet — see agents/guidelines.md, Tests). */
+
+:root {
+  --paper: #F8E7EA;
+  --paper-deep: #F0D2D8;
+  --blush: #FDF6F2;
+  --rose: #9C4F65;
+  --mauve: #C67F8F;
+  --gold: #C6A063;
+  --ink: #3E2C2E;
+  --cream: #FBF3EA;
+  /* Deeper variant of --gold for small text: --gold itself is ~2:1 on
+     --paper, which fails WCAG AA (4.5:1). Kept for decorative strokes/
+     sparkles/borders, never for text. See agents/felicity/memo.md. */
+  --gold-text: #836330;
+  /* Deeper variant of --ink for the wax-seal monogram: the seal's radial
+     highlight sits right under that text, so it's a light patch (not dark
+     rose) at that spot — --ink alone only clears WCAG AA by ~4.5:1 there
+     with no safety margin; this gives comfortable headroom (>5.5:1). */
+  --ink-deep: #2A1D1F;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--paper);
+}
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink);
+}
+
+a {
+  color: var(--rose);
+}
+
+a:hover {
+  color: #7D3E50;
+}
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 7vw, 56px) clamp(20px, 6vw, 64px);
+  background: radial-gradient(ellipse clamp(420px, 62vw, 900px) clamp(520px, 50vw, 720px) at 50% 41%, var(--blush) 0%, var(--paper) 62%, var(--paper-deep) 100%);
+}
+
+/* Corner sparkles */
+
+.corner-sparkle {
+  position: absolute;
+  width: clamp(13px, 1.3vw, 18px);
+  height: clamp(13px, 1.3vw, 18px);
+  opacity: 0.55;
+}
+
+.corner-sparkle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.corner-sparkle--top-left {
+  top: clamp(24px, 4vw, 56px);
+  left: clamp(20px, 4.5vw, 64px);
+}
+
+.corner-sparkle--top-right {
+  top: clamp(24px, 4vw, 56px);
+  right: clamp(20px, 4.5vw, 64px);
+}
+
+.corner-sparkle--bottom-left {
+  bottom: clamp(24px, 4vw, 56px);
+  left: clamp(20px, 4.5vw, 64px);
+  width: clamp(13px, 0.9vw, 13px);
+  height: clamp(13px, 0.9vw, 13px);
+  opacity: 0.4;
+}
+
+.corner-sparkle--bottom-right {
+  bottom: clamp(24px, 4vw, 56px);
+  right: clamp(20px, 4.5vw, 64px);
+  width: clamp(13px, 0.9vw, 13px);
+  height: clamp(13px, 0.9vw, 13px);
+  opacity: 0.4;
+}
+
+.corner-sparkle--desktop-only[hidden] {
+  display: none;
+}
+
+/* Center composition */
+
+.composition {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 1.8vw, 26px);
+  text-align: center;
+  max-width: 620px;
+}
+
+.monogram {
+  position: relative;
+  width: clamp(78px, 8vw, 110px);
+  height: clamp(78px, 8vw, 110px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.monogram::before,
+.monogram::after {
+  content: '';
+  position: absolute;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+}
+
+.monogram::before {
+  inset: 0;
+  border-width: 1.3px;
+}
+
+.monogram::after {
+  inset: 8px;
+}
+
+.monogram span {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(21px, 2.3vw, 30px);
+  color: var(--rose);
+  letter-spacing: clamp(1.5px, 0.15vw, 2px);
+}
+
+.sparkle-accent {
+  width: clamp(17px, 1.6vw, 22px);
+  height: clamp(17px, 1.6vw, 22px);
+}
+
+.wordmark {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(38px, 7vw, 66px);
+  line-height: 1.1;
+  color: var(--rose);
+}
+
+.wordmark__line2 {
+  display: block;
+}
+
+.lace-divider {
+  width: clamp(160px, 16vw, 220px);
+  height: auto;
+}
+
+.tagline {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(17px, 1.8vw, 24px);
+  line-height: 1.35;
+  color: var(--ink);
+  letter-spacing: 0.3px;
+  max-width: clamp(280px, 32vw, 460px);
+}
+
+.body-copy {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: clamp(280px, 32vw, 460px);
+}
+
+.badge {
+  margin: clamp(4px, 0.5vw, 6px) 0 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(12px, 1.1vw, 15px);
+  letter-spacing: clamp(2.5px, 0.25vw, 3.5px);
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+
+.wax-seal {
+  position: relative;
+  width: clamp(58px, 6vw, 76px);
+  height: clamp(58px, 6vw, 76px);
+  margin-top: clamp(10px, 1vw, 14px);
+}
+
+.wax-seal__blob {
+  width: 100%;
+  height: 100%;
+  border-radius: 46% 54% 52% 48% / 48% 46% 54% 52%;
+  background: radial-gradient(circle at 35% 30%, #D48FA0 0%, var(--mauve) 45%, var(--rose) 100%);
+  box-shadow: 0 4px 10px rgba(156, 79, 101, 0.35), inset 0 -3px 6px rgba(62, 44, 46, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wax-seal__blob span {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(17px, 1.6vw, 22px);
+  /* Deep ink, not gold: gold text here was under 2.5:1 against the seal's
+     mauve/rose gradient. Counter-intuitively cream doesn't fix it either —
+     the gradient's light highlight (radial-gradient center) sits right
+     under this text, so it's a light patch locally, not the dark rose the
+     seal reads as overall. See agents/felicity/memo.md for the numbers. */
+  color: var(--ink-deep);
+  letter-spacing: 1px;
+}
+
+.wax-seal__drip {
+  position: absolute;
+  bottom: -4px;
+  left: 36%;
+  width: clamp(9px, 0.9vw, 12px);
+  height: clamp(7px, 0.7vw, 9px);
+  border-radius: 50%;
+  background: var(--rose);
+  opacity: 0.85;
+}
+
+.footer {
+  position: absolute;
+  bottom: clamp(18px, 2.5vw, 30px);
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(11px, 1vw, 13px);
+  letter-spacing: clamp(1.2px, 0.13vw, 1.5px);
+  color: var(--ink);
+  /* Was 0.5 (≈2.75:1 on --paper, fails WCAG AA). 0.72 keeps the same muted
+     footer look while clearing the 4.5:1 threshold (~4.9:1). */
+  opacity: 0.72;
+}
