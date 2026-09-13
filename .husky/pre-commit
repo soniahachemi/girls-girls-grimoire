@@ -1,0 +1,9 @@
+files=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [ -n "$files" ]; then
+  echo "pre-commit: scan de secrets (secretlint)…"
+  npx secretlint --secretlintrc .secretlintrc.json $files || exit 1
+fi
+
+echo "pre-commit: exécution des tests (npm test)…"
+npm test || exit 1
