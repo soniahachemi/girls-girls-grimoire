@@ -1,0 +1,16 @@
+{
+  "name": "girls-girls-grimoire",
+  "private": true,
+  "description": "Outillage et tests pour la page Coming Soon de girlsgirlsgrimoire.com — ne fait pas partie du site déployé (voir public/).",
+  "scripts": {
+    "test": "playwright test",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "^1.48.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^9.0.0",
+    "husky": "^9.1.7",
+    "secretlint": "^9.0.0"
+  }
+}
