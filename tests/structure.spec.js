@@ -4,6 +4,13 @@ const { test, expect } = require('@playwright/test');
 /**
  * Structural tests for the Coming Soon page (GGG-7), based on the validated
  * mockup (design/mockups/GGG-8_coming-soon/desktop.html + mobile.html).
+ * None of these assertions depend on viewport size, so this file runs once
+ * (project `structure-a11y-chromium`, see playwright.config.js) instead of
+ * once per viewport size (GGG-12). The one test that did depend on
+ * viewport size ("corner sparkles" count) has moved to
+ * tests/responsive.spec.js, which already carried an equivalent,
+ * viewport-width-based version of it (added on GGG-10) -- keeping both was
+ * a duplicate this file no longer has.
  *
  * data-testid contract expected from the Developer (GGG-4) for purely
  * decorative elements with no otherwise-identifiable text:
@@ -66,12 +73,6 @@ test.describe('Structure', () => {
 
   test('the standalone sparkle under the medallion is present', async ({ page }) => {
     await expect(page.getByTestId('sparkle-accent')).toBeVisible();
-  });
-
-  test('decorative corner sparkles are present (4 desktop / 2 mobile / 2 tablet)', async ({ page }, testInfo) => {
-    const sparkles = page.getByTestId('corner-sparkle');
-    const expected = testInfo.project.name === 'desktop' ? 4 : 2;
-    await expect(sparkles).toHaveCount(expected);
   });
 
   test('Google Fonts are loaded, with a serif fallback', async ({ page }) => {

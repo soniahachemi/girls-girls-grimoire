@@ -6,7 +6,9 @@ const AxeBuilder = require('@axe-core/playwright').default;
  * Accessibility tests for the Coming Soon page (GGG-7): automated WCAG 2.1
  * AA audit via axe-core (contrast included), plus a few targeted checks
  * (lang, title, heading hierarchy, decorative elements hidden from screen
- * readers). See tests/structure.spec.js for the data-testid contract.
+ * readers). None of these depend on viewport size, so this file runs once
+ * (project `structure-a11y-chromium`, see playwright.config.js — GGG-12).
+ * See tests/structure.spec.js for the data-testid contract.
  */
 
 /** @param {import('@playwright/test').Locator} locator */
