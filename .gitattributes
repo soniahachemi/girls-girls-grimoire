@@ -1,0 +1,4 @@
+# Normalise les fins de ligne en LF pour tout le dépôt, quel que soit l'OS de
+# la machine qui édite (évite les diffs de bruit CRLF/LF constatés en
+# clôturant GGG-14 — voir agents/guidelines.md, section Conventions).
+* text=auto eol=lf
