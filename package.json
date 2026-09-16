@@ -4,6 +4,7 @@
   "description": "Outillage et tests pour la page Coming Soon de girlsgirlsgrimoire.com — ne fait pas partie du site déployé (voir public/).",
   "scripts": {
     "test": "playwright test",
+    "config": "node scripts/generate-config.js",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -11,6 +12,7 @@
     "@playwright/test": "^1.48.0",
     "@secretlint/secretlint-rule-preset-recommend": "^9.0.0",
     "husky": "^9.1.7",
-    "secretlint": "^9.0.0"
+    "secretlint": "^9.0.0",
+    "secretlint-rule-supabase-secret": "file:scripts/secretlint-rules/secretlint-rule-supabase-secret"
   }
 }

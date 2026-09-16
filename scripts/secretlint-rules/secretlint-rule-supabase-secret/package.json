@@ -1,0 +1,7 @@
+{
+  "name": "secretlint-rule-supabase-secret",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local secretlint rule: detects Supabase secret keys (sb_secret_...), not covered by the official recommended preset.",
+  "main": "index.js"
+}

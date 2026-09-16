@@ -26,3 +26,16 @@ node_modules/
 # Fichiers système
 .DS_Store
 Thumbs.db
+
+# Fichiers de travail temporaires d'un agent (voir Ticcy/roles/common.md,
+# section "Fichier temporaire") — jamais commités.
+temp/
+
+# Valeurs d'environnement locales (dev) — voir .env.example pour les noms de
+# variables attendues, et agents/guidelines.md (Stack/Sécurité) pour le détail.
+.env
+
+# Fichier de config généré à partir de .env (dev, en local) ou des secrets
+# GitHub Actions (prod, juste avant le déploiement) — voir scripts/generate-config.js
+# et .github/workflows/deploy.yml. Le modèle committé est public/assets/config.example.js.
+public/assets/config.js

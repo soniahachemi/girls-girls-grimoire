@@ -15,6 +15,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Étape de génération de config (GGG-14) -- exception ciblée et minime
+      # à la convention "aucune étape de build" du projet (voir
+      # agents/guidelines.md, Stack) : on ne fait que produire un petit
+      # fichier de config (URL/clé Supabase prod, config Cloudinary prod),
+      # jamais commité, à partir de secrets GitHub Actions -- comme les
+      # identifiants FTP ci-dessous. Le script est le même qu'en local
+      # (npm run config), seule la source des variables change (secrets ici,
+      # .env en local -- voir scripts/generate-config.js).
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate site config (prod)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL_PROD }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY_PROD }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_FOLDER: prod
+        run: node scripts/generate-config.js
+
       - name: Sync public/ to public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
