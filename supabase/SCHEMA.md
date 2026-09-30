@@ -104,6 +104,7 @@ tout).
 |---|---|---|---|
 | id | uuid | PK, default `gen_random_uuid()` | |
 | link | text | not null | |
+| name | text | nullable | **repère interne uniquement** (GGG-32) — jamais affiché aux visiteurs |
 | created_at / updated_at | timestamptz | not null | `updated_at` maintenu par trigger |
 
 Aucune colonne de relation sur cette table (pas de `product_id`) : la
@@ -111,6 +112,11 @@ relation est à sens unique, portée uniquement par `product.affiliate_link_id`
 (confirmé par Bimo, 30/09/2026, voir GGG-31) — un produit peut être lié à un
 lien affilié, jamais l'inverse. Introduite pour pouvoir stocker à terme
 d'autres informations que le seul lien, sans alourdir `product`.
+
+`name` (GGG-32) sert uniquement à ce que Bimo puisse identifier à quel
+produit correspond une ligne en parcourant la table dans Supabase Studio
+(ex. "Baume Lèvres Miel - Amazon") — ce n'est pas une donnée métier, elle
+n'apparaît jamais côté site public.
 
 ## RLS (sécurité)
 
