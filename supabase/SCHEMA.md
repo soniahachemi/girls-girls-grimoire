@@ -9,12 +9,16 @@ schéma est défini par les migrations SQL de `supabase/migrations/`
 
 ```
 category 1───* product 1───* pick *───1 profile
+affiliate_link 1───* product
 ```
 
 - `category` : catégories de produits, table extensible (pas un ENUM).
 - `profile` : les "girls girls", fantômes en V2 (pas d'auth).
 - `product` : produits recommandés.
 - `pick` : la recommandation qui relie un `profile` à un `product`.
+- `affiliate_link` : lien affilié d'un produit (GGG-31). Relation à sens
+  unique portée par `product` : `affiliate_link` ne référence rien, jamais
+  l'inverse.
 
 ## Convention de nommage
 
@@ -56,19 +60,22 @@ requête supabase-js (`.select('id, profileId:profile_id, ...')`).
 | name | text | not null | |
 | brand | text | not null | |
 | link | text | nullable | lien de commande direct |
-| affiliate_link | text | nullable | lien affilié |
+| affiliate_link_id | uuid | nullable, FK → `affiliate_link.id` | lien affilié (GGG-31) -- récupérer via `affiliate_link.link` |
 | images | text[] | not null, default `{}` | URLs Cloudinary, ordre = ordre d'affichage |
 | description | text | not null | |
 | category_id | uuid | not null, FK → `category.id` | |
 | created_at / updated_at | timestamptz | not null | |
 
-**`link` et `affiliate_link` sont chacun nullable, mais au moins un des deux
-doit être renseigné** (contrainte `product_link_or_affiliate_link`) —
-décision de Bimo (17/09/2026) : un produit peut n'avoir qu'un lien direct,
-qu'un lien affilié, ou les deux. Côté front, tester lequel des deux existe
-avant d'afficher le bouton de commande (préférer `affiliate_link` s'il est
-présent, sinon `link` — à confirmer avec Bimo au moment du dev front,
-GGG-18).
+**`link` et `affiliate_link_id` sont chacun nullable, mais au moins un des
+deux doit être renseigné** (contrainte `product_link_or_affiliate_link`,
+mise à jour sur GGG-31) — décision de Bimo (17/09/2026, confirmée pour la
+relation le 30/09/2026) : un produit peut n'avoir qu'un lien direct, qu'un
+lien affilié, ou les deux. Depuis GGG-31, le lien affilié n'est plus un
+simple texte sur `product` : il faut joindre `affiliate_link` via
+`affiliate_link_id` pour récupérer l'URL (`affiliate_link.link`). Côté
+front, tester lequel des deux existe avant d'afficher le bouton de commande
+(préférer le lien affilié s'il est présent, sinon `link` — à confirmer avec
+Bimo au moment du dev front, GGG-18).
 
 ### `pick`
 | Colonne | Type | Contraintes | Notes |
@@ -92,14 +99,28 @@ poser `rating = 5` met automatiquement `approved = true` (trigger
 l'inverse n'est pas vrai (on peut approuver sans note 5, ou sans note du
 tout).
 
+### `affiliate_link`
+| Colonne | Type | Contraintes | Notes |
+|---|---|---|---|
+| id | uuid | PK, default `gen_random_uuid()` | |
+| link | text | not null | |
+| created_at / updated_at | timestamptz | not null | `updated_at` maintenu par trigger |
+
+Aucune colonne de relation sur cette table (pas de `product_id`) : la
+relation est à sens unique, portée uniquement par `product.affiliate_link_id`
+(confirmé par Bimo, 30/09/2026, voir GGG-31) — un produit peut être lié à un
+lien affilié, jamais l'inverse. Introduite pour pouvoir stocker à terme
+d'autres informations que le seul lien, sans alourdir `product`.
+
 ## RLS (sécurité)
 
-Lecture publique (rôle `anon`) sur les 4 tables, **aucune écriture
+Lecture publique (rôle `anon`) sur les 5 tables, **aucune écriture
 publique** — voir `supabase/migrations/20260916230300_enable_rls_policies.sql`
-et la note de sécurité de l'Architecte sur GGG-13 (les clés
-URL/publishable ne sont pas des secrets : les policies RLS sont l'unique
-frontière de sécurité réelle). Les 4 tables sont publiques dans leur
-intégralité, y compris les picks non approuvées.
+et `20260930210000_add_affiliate_link_table.sql`, ainsi que la note de
+sécurité de l'Architecte sur GGG-13 (les clés URL/publishable ne sont pas des
+secrets : les policies RLS sont l'unique frontière de sécurité réelle). Les 5
+tables sont publiques dans leur intégralité, y compris les picks non
+approuvées.
 
 ## Recherche multi-type (GGG-16)
 
@@ -116,6 +137,6 @@ cohérent avec l'absence de backend/build. Voir la migration
 ## Données de test (dev uniquement)
 
 `supabase/seed.sql` — jeu de données minimal (catégories, 2 profils, 3
-produits couvrant les 3 cas de `link`/`affiliate_link`, 2 picks dont une
-sert à vérifier le trigger `pick_auto_approve`). **Jamais exécuté sur le
-projet prod.**
+produits couvrant les 3 cas de `link`/`affiliate_link_id` (via GGG-31), 2
+picks dont une sert à vérifier le trigger `pick_auto_approve`). **Jamais
+exécuté sur le projet prod.**

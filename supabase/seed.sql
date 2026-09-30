@@ -6,8 +6,8 @@
 -- données saisies par Bimo.
 --
 -- Couvre volontairement plusieurs cas limites du schéma :
--- - un produit avec seulement "link", un avec seulement "affiliate_link",
---   un avec les deux (contrainte product_link_or_affiliate_link) ;
+-- - un produit avec seulement "link", un avec seulement "affiliate_link_id",
+--   un avec les deux (contrainte product_link_or_affiliate_link, GGG-31) ;
 -- - une pick avec rating=5 et approved explicitement laissé à false à
 --   l'insertion : sert à vérifier que le trigger pick_auto_approve la
 --   repasse bien à true automatiquement ;
@@ -27,15 +27,23 @@ insert into public.product (name, brand, link, images, description, category_id)
 select 'Sérum Vitamine C', 'GlowLab', 'https://example.com/serum-vitamine-c', '{}', 'Sérum éclat au quotidien.', id
 from public.category where slug = 'beauty';
 
--- Produit avec seulement "affiliate_link".
-insert into public.product (name, brand, affiliate_link, images, description, category_id)
-select 'Baume Lèvres Miel', 'HoneyCare', 'https://example.com/aff/baume-levres-miel', '{}', 'Baume nourrissant au miel.', id
-from public.category where slug = 'care';
+-- Produit avec seulement "affiliate_link_id".
+with new_link as (
+  insert into public.affiliate_link (link) values ('https://example.com/aff/baume-levres-miel')
+  returning id
+)
+insert into public.product (name, brand, affiliate_link_id, images, description, category_id)
+select 'Baume Lèvres Miel', 'HoneyCare', new_link.id, '{}', 'Baume nourrissant au miel.', category.id
+from new_link, public.category as category where category.slug = 'care';
 
--- Produit avec les deux.
-insert into public.product (name, brand, link, affiliate_link, images, description, category_id)
-select 'Spray Multi-Surfaces', 'CleanEasy', 'https://example.com/spray-multi-surfaces', 'https://example.com/aff/spray-multi-surfaces', '{}', 'Nettoyant écologique.', id
-from public.category where slug = 'cleaning';
+-- Produit avec les deux (link et affiliate_link_id).
+with new_link as (
+  insert into public.affiliate_link (link) values ('https://example.com/aff/spray-multi-surfaces')
+  returning id
+)
+insert into public.product (name, brand, link, affiliate_link_id, images, description, category_id)
+select 'Spray Multi-Surfaces', 'CleanEasy', 'https://example.com/spray-multi-surfaces', new_link.id, '{}', 'Nettoyant écologique.', category.id
+from new_link, public.category as category where category.slug = 'cleaning';
 
 -- Pick avec rating=5 et approved=false à l'insertion -> le trigger
 -- pick_auto_approve doit forcer approved à true.
